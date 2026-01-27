@@ -1,0 +1,63 @@
+﻿@using Ecommerce.Models
+@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<TChatLieu>
+
+@{
+    ViewData["Title"] = "Material";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h3>List Materials</h3>
+
+<p>
+    <a asp-area="Admin" asp-action="Create" asp-controller="Material">Add Material</a>
+</p>
+<p>@TempData["Message"]</p>
+
+<table class="table">
+    <thead>
+        <tr class="table-warning">
+            <th>
+                Mã chất liệu
+            </th>
+            <th>
+                Tên chất liệu
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 0;
+            string @cls = "table-success";
+        }
+        @foreach (var item in Model)
+        {
+            i = i + 1;
+            cls = "table-success";
+            if (i % 2 == 0)
+            {
+                cls = "table-secondary";
+            }
+            <tr class=@cls>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaChatLieu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChatLieu)
+                </td>
+                <td>
+                    <a asp-area="Admin" asp-action="Edit" class="btn btn-warning btn-sm" asp-controller="Material" asp-route-maSanPham="@item.MaChatLieu">Edit</a> |
+                    @* <a >Details</a> | *@
+                    <a asp-area="Admin" asp-action="Delete" class="btn btn-danger btn-sm" asp-controller="Material" asp-route-maSanPham="@item.MaChatLieu">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), new X.PagedList.Web.Common.PagedListRenderOptionsBase()
+{
+    LiElementClasses = new List<String> { "page-item" },
+    PageClasses = new List<String> { "page-link" }
+})

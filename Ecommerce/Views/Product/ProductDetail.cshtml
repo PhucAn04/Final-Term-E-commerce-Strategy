@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "ProductDetail";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+@model Ecommerce.ViewModels.HomeProductDetailViewModel
+
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				@Html.Partial("_SidebarPartial")
+			</div>
+
+			<div class="col-sm-9 padding-right">
+				<div class="product-details">
+					<!--product-details-->
+					<div class="col-sm-5">
+						<div class="view-product">
+							<img src="@Url.Content("../ProductsImages/" + Model.danhMucSp.AnhDaiDien)" alt="" />
+						</div>
+					</div>
+					<div class="col-sm-7">
+						<div class="product-information">
+							<!--/product-information-->
+							<h2>@Model.danhMucSp.TenSp</h2>
+							<span>
+								<span>US $@Model.danhMucSp.GiaLonNhat</span>
+								@* <label>Quantity:</label> *@
+								@* <input type="text" value="3" /> *@
+								<form asp-action="AddToCart" asp-controller="Cart" asp-route-id="@Model.danhMucSp.MaSp">
+									<button type="submit" class="btn btn-fefault cart">
+									<i class="fa fa-shopping-cart"></i>
+									Add to cart
+								</button>
+								</form>
+							</span>
+							<p><b>Availability:</b> In Stock</p>
+							<p><b>Condition:</b> New</p>
+							<p><b>Products Infomation:</b> @Model.danhMucSp.GioiThieuSp</p>
+							<a href=""><img src="images/product-details/share.png" class="share img-responsive" alt="" /></a>
+						</div><!--/product-information-->
+					</div>
+				</div><!--/product-details-->
+			</div>
+		</div>
+	</div>
+</section>

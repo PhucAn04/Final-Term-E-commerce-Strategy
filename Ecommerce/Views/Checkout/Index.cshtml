@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Ecommerce.ViewModels.CartItemViewModel>
+@{
+    ViewData["Title"] = "Checkout Page";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Check out</li>
+            </ol>
+        </div><!--/breadcrums-->
+        <form asp-area="" asp-controller="Checkout" asp-action="Checkout">
+            <div class="shopper-informations">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="shopper-info">
+                            <div class="checkout__input">
+                                <p>Full Name<span>*</span></p>
+                                <input type="text" name="HoTen">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Address<span>*</span></p>
+                                <input type="text" name="DiaChi">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Phone Number<span>*</span></p>
+                                <input type="text" name="PhoneNumber">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="order-message">
+                            <p>Shipping Order</p>
+                            <textarea type="text" name="GhiChu" placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-payment">
+                <h2>Review & Payment</h2>
+            </div>
+
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Item</td>
+                            <td class="description"></td>
+                            <td class="price">Price</td>
+                            <td class="quantity">Quantity</td>
+                            <td class="total">Total</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="cart_product">
+                                    <img src="~/ProductsImages/@item.hinh" alt="@item.tenSp" width="200" height="200">
+                                </td>
+                                <td class="cart_description">
+                                    <h4><a asp-controller="Product" asp-action="ProductDetail" asp-route-maSp="@item.MaSp" style="color: black;">@item.tenSp</a></h4>
+                                </td>
+                                <td class="cart_price">
+                                    <p>$@item.donGia</p>
+                                </td>
+                                <td>
+                                    <input class="cart_quantity_input" type="text" name="quantity" value="@item.soLuong" autocomplete="off" size="2">
+                                </td>
+                                <td class="cart_total">
+                                    <p class="cart_total_price">$@item.thanhTien</p>
+                                </td>
+                                <td class="cart_delete">
+                                    <a asp-action="RemoveCart" asp-controller="Cart" asp-route-id="@item.MaSp" class="cart_quantity_delete"><i class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
+                        }
+                        <tr rowspan="5">
+                            <td colspan="6">Grand Total: <p class="cart_total_price">$@Model.Sum(p => p.thanhTien)</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-right" style="margin-top:15px;">
+                    <button type="submit" class="btn btn-default check_out ml-2">PLACE ORDER</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section> <!--/#cart_items-->

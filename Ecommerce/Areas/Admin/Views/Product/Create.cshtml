@@ -1,0 +1,124 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Ecommerce.Models.TDanhMucSp
+
+@{
+    ViewData["Title"] = "Add Product";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Add Product</h1>
+
+<div class="col-md-12">
+    <form asp-area="Admin" method="post" asp-action="Create" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label>Id</label>
+            <input asp-for="MaSp" class="form-control" />
+            <span asp-validation-for="MaSp" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input asp-for="TenSp" class="form-control" />
+            <span asp-validation-for="TenSp" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Laptop compartment</label>
+            <input asp-for="NganLapTop" class="form-control" />
+            <span asp-validation-for="NganLapTop" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Model</label>
+            <input asp-for="Model" class="form-control" />
+            <span asp-validation-for="Model" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Weight</label>
+            <input asp-for="CanNang" class="form-control" />
+            <span asp-validation-for="CanNang" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>expandable capacity</label>
+            <input asp-for="DoNoi" class="form-control" />
+            <span asp-validation-for="DoNoi" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Website</label>
+            <input asp-for="Website" class="form-control" />
+            <span asp-validation-for="Website" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Warranty period</label>
+            <input asp-for="ThoiGianBaoHanh" class="form-control" />
+            <span asp-validation-for="ThoiGianBaoHanh" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Product Introduction</label>
+            <input asp-for="GioiThieuSp" class="form-control" />
+            <span asp-validation-for="GioiThieuSp" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Discount</label>
+            <input asp-for="ChietKhau" class="form-control" />
+            <span asp-validation-for="ChietKhau" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Lowest Price</label>
+            <input asp-for="GiaNhoNhat" class="form-control" />
+            <span asp-validation-for="GiaNhoNhat" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Biggest Price</label>
+            <input asp-for="GiaLonNhat" class="form-control" />
+            <span asp-validation-for="GiaLonNhat" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Material</label>
+            <select asp-for="MaChatLieu" class="form-control" asp-items="ViewBag.TChatLieus">
+                <option value="">-- Choose a Material --</option>
+            </select>
+            <span asp-validation-for="MaChatLieu" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Brand</label>
+            <select asp-for="MaHangSx" class="form-control" asp-items="ViewBag.THangSxes">
+                <option value="">-- Choose a Brand --</option>
+            </select>
+            <span asp-validation-for="MaHangSx" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Country</label>
+            <select asp-for="MaNuocSx" class="form-control" asp-items="ViewBag.TQuocGias">
+                <option value="">-- Choose a Country --</option>
+            </select>
+            <span asp-validation-for="MaNuocSx" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Property</label>
+            <select asp-for="MaDt" class="form-control" asp-items="ViewBag.TLoaiDts">
+                <option value="">-- Choose a Property --</option>
+            </select>
+            <span asp-validation-for="MaDt" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Category</label>
+            <select asp-for="MaLoai" class="form-control" asp-items="ViewBag.TLoaiSps">
+                <option value="">-- Choose a Category --</option>
+            </select>
+            <span asp-validation-for="MaLoai" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Image</label>
+            <input asp-for="ImageUpload" type="file" class="form-control" />
+            <span asp-validation-for="ImageUpload" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+    <a asp-area="Admin" asp-action="Index" asp-controller="Product">Back to List Product</a>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

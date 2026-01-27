@@ -1,0 +1,34 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Ecommerce.Models.TLoaiSp
+
+@{
+    ViewData["Title"] = "Add Categories";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Add Category</h1>
+
+<div class="col-md-12">
+    <form asp-area="Admin" method="post" asp-action="Create" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label>Id</label>
+            <input asp-for="MaLoai" class="form-control" />
+            <span asp-validation-for="MaLoai" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input asp-for="Loai" class="form-control" />
+            <span asp-validation-for="Loai" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+    <a asp-area="Admin" asp-action="Index" asp-controller="Category">Back to List Product</a>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

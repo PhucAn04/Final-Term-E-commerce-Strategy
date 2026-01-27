@@ -1,0 +1,58 @@
+﻿@using Ecommerce.Models
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<THoaDonBan>
+
+@{
+    ViewData["Title"] = "Orders";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h3>List Orders</h3>
+
+<p>@TempData["Message"]</p>
+
+<table class="table">
+    <thead>
+        <tr class="table-warning">
+            <th>Order ID</th>
+            <th>Customer Name</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Order Date</th>
+            <th>Status</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 0;
+            string cls = "table-success";
+        }
+        @foreach (var order in Model)
+        {
+            i++;
+            cls = (i % 2 == 0) ? "table-secondary" : "table-success";
+            <tr class="@cls">
+                <td>@order.MaHoaDon</td>
+                <td>@order.HoTen</td>
+                <td>@order.PhoneNumber</td>
+                <td>@order.DiaChi</td>
+                <td>@order.NgayDat.ToString("dd/MM/yyyy")</td>
+                <td>@order.MaTrangThaiNavigation?.TenTrangThai</td>
+                <td>@string.Format("{0:N0} ₫", order.TongTienHd)</td>
+                <td>
+                    <a asp-area="Admin" asp-action="Detail" asp-controller="Order" asp-route-id="@order.MaHoaDon" class="btn btn-info btn-sm">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+new X.PagedList.Web.Common.PagedListRenderOptionsBase()
+{
+    LiElementClasses = new List<string> { "page-item" },
+    PageClasses = new List<string> { "page-link" }
+})

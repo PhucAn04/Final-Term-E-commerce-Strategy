@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Ecommerce.ViewModels.CartItemViewModel>
+@{
+	ViewData["Title"] = "Cart Page";
+	Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<section id="cart_items">
+	<div class="container">
+		<div class="breadcrumbs">
+			<ol class="breadcrumb">
+				<li><a href="#">Home</a></li>
+				<li class="active">Shopping Cart</li>
+			</ol>
+		</div>
+		<div class="table-responsive cart_info">
+			<table class="table table-condensed">
+				<thead>
+					<tr class="cart_menu">
+						<td class="image">Item</td>
+						<td class="description"></td>
+						<td class="price">Price</td>
+						<td class="quantity">Quantity</td>
+						<td class="total">Total</td>
+						<td></td>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+					<tr>
+						<td class="cart_product">
+							<img src="~/ProductsImages/@item.hinh" alt="@item.tenSp" width="200" height="200">
+						</td>
+						<td class="cart_description">
+							<h4><a asp-controller="Product" asp-action="ProductDetail" asp-route-maSp="@item.MaSp" style="color: black;">@item.tenSp</a></h4>
+						</td>
+						<td class="cart_price">
+							<p>$@item.donGia</p>
+						</td>
+						<td>
+								<a class="btn btn-success btn-sm" asp-controller="Cart" asp-action="Increase" asp-route-id="@item.MaSp"> + </a>
+								<input class="cart_quantity_input" type="text" name="quantity" value="@item.soLuong" autocomplete="off" size="2">
+								<a class="btn btn-success btn-sm" asp-controller="Cart" asp-action="Decrease" asp-route-id="@item.MaSp"> - </a>
+						</td>
+						<td class="cart_total">
+								<p class="cart_total_price">$@item.thanhTien</p>
+						</td>
+						<td class="cart_delete">
+							<a asp-action="RemoveCart" asp-controller="Cart" asp-route-id="@item.MaSp" class="cart_quantity_delete"><i class="fa fa-times"></i></a>
+						</td>
+					</tr>
+					}
+					<tr rowspan="5">
+						<td colspan="6">Grand Total: <p class="cart_total_price">$@Model.Sum(p => p.thanhTien)</p></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="text-right" style="margin-top:15px;">
+				<a asp-area="" asp-controller="Product" asp-action="Index" class="btn btn-default update">CONTINUE SHOPPING</a>
+				<a asp-area="" asp-controller="Checkout" asp-action="Index" class="btn btn-default check_out ml-2">CHECKOUT</a>
+			</div>
+		</div>
+	</div>
+</section> <!--/#cart_items-->

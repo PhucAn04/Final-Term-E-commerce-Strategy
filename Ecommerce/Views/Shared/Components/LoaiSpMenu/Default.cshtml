@@ -1,0 +1,10 @@
+﻿@model IEnumerable<TLoaiSp>
+
+@foreach (var item in Model)
+{
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title"><li><a asp-area="" asp-controller="Category" asp-action="Index" asp-route-maloai="@item.MaLoai">@item.Loai</a></li></h4>
+		</div>
+	</div>
+}

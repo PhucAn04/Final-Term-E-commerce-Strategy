@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "AccessDenied";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<section id="form">
+    <div class="container">
+        <div class="row">
+            <div class="shadow-lg border-0 text-center p-4">
+                <div class="mb-3 text-danger">
+                    <i class="fa fa-ban fa-4x"></i>
+                </div>
+                <h1 class="h3 mb-3 fw-bold text-uppercase text-danger">Access Denied</h1>
+                <p class="mb-4">Sorry, you do not have permission to access this page.</p>
+                <a asp-action="Index" asp-controller="Home" class="btn btn-primary">
+                    <i class="fa fa-home me-2"></i> Go to Home
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
