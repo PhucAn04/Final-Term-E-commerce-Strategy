@@ -341,6 +341,36 @@
 	<script src="~/Eshopper/js/price-range.js"></script>
 	<script src="~/Eshopper/js/jquery.prettyPhoto.js"></script>
 	<script src="~/Eshopper/js/main.js"></script>
+
+	<script>
+		// Tọa độ của cửa hàng (Quận 7, HCM)
+		const lat = 10.743064;
+		const lng = 106.702281;
+		var map = L.map('map').setView([lat, lng], 16);
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		  maxZoom: 19,
+		  attribution: '&copy; OpenStreetMap'
+		}).addTo(map);
+		L.marker([lat, lng]).addTo(map).bindPopup("E-SHOPPER").openPopup();
+	</script>
+
+	<!--Start of Tawk.to Script-->
+	<script type="text/javascript">
+		var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+		(function(){
+		var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+		s1.async=true;
+		s1.src='https://embed.tawk.to/693a63362f4d14197d5a13f7/1jc617468';
+		s1.charset='UTF-8';
+		s1.setAttribute('crossorigin','*');
+		s0.parentNode.insertBefore(s1,s0);
+		})();
+	</script>
+	<!--End of Tawk.to Script-->
+	<!--Start of Mailchimp Script-->
+	<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/d32dfcbae5cd9a920a6d9a08c/88a995a393afd6a5c2a743b91.js");</script>
+	<!--End of Mailchimp Script-->
+
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
