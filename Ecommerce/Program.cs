@@ -1,8 +1,10 @@
-﻿using Ecommerce.Data;
+using Ecommerce.Data;
 using Ecommerce.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
+using Ecommerce.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +43,16 @@ builder.Services.AddScoped<Ecommerce.Repositories.ILoaiSpRepository, Ecommerce.R
 
 // Email Sender (fake for dev)
 builder.Services.AddSingleton<IEmailSender, FakeEmailSender>();
+
+// Stripe Configuration
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe")["SecretKey"];
+
+// Paypal Configuration
+builder.Services.AddSingleton(x => new PaypalClient(
+        builder.Configuration["PaypalOptions:AppId"],
+        builder.Configuration["PaypalOptions:AppSecret"],
+        builder.Configuration["PaypalOptions:Mode"]
+));
 
 // MVC + Razor
 builder.Services.AddControllersWithViews();
